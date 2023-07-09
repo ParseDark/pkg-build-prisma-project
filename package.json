@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "bin": "public/index.js",
+  "bin": "dist/index.js",
   "scripts": {
+    "build": "rm -rf ./dist && tsc && cp -r ./prisma ./dist",
+    "pkg": "pkg .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,14 +14,14 @@
   "license": "ISC",
   "pkg": {
     "assets": [
-      "node_modules/.prisma/client/*.node",
-      "public/**/*"
+      "node_modules/.prisma/client/*",
+      "dist/prisma/dev.db",
+      "dist/**/*"
     ],
     "targets": [
-      "win",
-      "macos",
-      "linux"
-    ]
+      "macos"
+    ],
+    "outputPath": "executable"
   },
   "devDependencies": {
     "@types/node": "^20.4.1",
@@ -30,5 +32,9 @@
   "dependencies": {
     "@prisma/client": "^4.16.2",
     "dotenv": "^16.3.1"
+  },
+  "engines": {
+    "node": "16.20.1",
+    "npm": "8.19.4"
   }
 }

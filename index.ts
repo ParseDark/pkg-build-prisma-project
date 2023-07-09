@@ -6,11 +6,13 @@ const prisma = new PrismaClient()
 console.log("user")
 
 async function main() {
-  const user = await prisma.user.findFirst({
-    where: {
-      email: 'alice@prisma.io',
-    }
+  const user1 = await prisma.user.create({
+    data: {
+      name: 'Alice' + Math.random(),
+      email: 'alice@prisma.io' + Math.random(),
+    },
   })
+  const user = await prisma.user.findMany()
   console.log(user)
 }
 
